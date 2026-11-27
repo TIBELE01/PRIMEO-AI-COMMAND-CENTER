@@ -16,8 +16,9 @@ validations humaines, traçabilité complète).
 ```
 .
 ├── apps/
-│   ├── web/              Interface du PDG (Next.js) — dashboard et 8 modules
-│   └── worker/           Exécution 24/7 : file de tâches, planification, agents
+│   ├── web/              Frontend : interface du PDG (Next.js) — dashboard et 8 modules
+│   ├── backend/          Backend — API : point d'entrée unique des opérations (Fastify)
+│   └── worker/           Backend — exécution 24/7 : file de tâches, planification, agents
 ├── packages/
 │   ├── domain/           Modèle métier pur (missions, approbations, niveaux…)
 │   ├── governance/       Garde-fou : permissions, niveaux 1/2/3, approbations, audit
@@ -72,12 +73,12 @@ pnpm dev
 
 ## Commandes
 
-| Commande         | Effet                                   |
-| ---------------- | --------------------------------------- |
-| `pnpm dev`       | Lance l'interface et le worker en local |
-| `pnpm build`     | Compile les applications                |
-| `pnpm lint`      | Analyse statique                        |
-| `pnpm typecheck` | Vérification des types                  |
-| `pnpm test`      | Tests unitaires (Vitest)                |
-| `pnpm test:e2e`  | Tests de bout en bout (Playwright)      |
-| `pnpm format`    | Formatage (Prettier)                    |
+| Commande         | Effet                                          |
+| ---------------- | ---------------------------------------------- |
+| `pnpm dev`       | Lance le frontend, l'API et le worker en local |
+| `pnpm build`     | Compile les applications                       |
+| `pnpm lint`      | Analyse statique                               |
+| `pnpm typecheck` | Vérification des types                         |
+| `pnpm test`      | Tests unitaires (Vitest)                       |
+| `pnpm test:e2e`  | Tests de bout en bout (Playwright)             |
+| `pnpm format`    | Formatage (Prettier)                           |

@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@primeo/config": "workspace:*",
-    "@primeo/db": "workspace:*",
     "@primeo/domain": "workspace:*",
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.119.2",

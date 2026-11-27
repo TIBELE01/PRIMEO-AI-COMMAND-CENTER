@@ -12,7 +12,7 @@ de la plateforme immobilière Primeo.
 ## Décision
 
 - Dépôt unique (monorepo) **pnpm workspaces + Turborepo**, en TypeScript strict.
-- `apps/web` (Next.js) et `apps/worker` (Node.js) déployés séparément.
+- `apps/web` (Next.js) et `apps/worker` (Node.js) déployés séparément (complété par l'ADR-0002 : `apps/backend`).
 - Logique partagée dans `packages/*`, avec un sens de dépendance imposé (voir `packages/README.md`).
 - La gouvernance est un paquet isolé, par lequel passe toute action d'agent.
 - L'organisation des agents est déclarative (`catalog/`), pas codée en dur.

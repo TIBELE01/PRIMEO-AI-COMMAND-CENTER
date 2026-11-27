@@ -1,0 +1,27 @@
+{
+  "name": "@primeo/backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API du Command Center : point d'entrée unique de toutes les opérations métier.",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@primeo/config": "workspace:*",
+    "@primeo/db": "workspace:*",
+    "@primeo/domain": "workspace:*",
+    "@primeo/governance": "workspace:*",
+    "@primeo/observability": "workspace:*",
+    "fastify": "5.12.8"
+  },
+  "devDependencies": {
+    "@primeo/eslint-config": "workspace:*",
+    "@primeo/tsconfig": "workspace:*",
+    "tsx": "4.23.15"
+  }
+}
