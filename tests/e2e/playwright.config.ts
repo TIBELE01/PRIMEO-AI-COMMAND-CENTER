@@ -1,3 +1,4 @@
+import { randomBytes } from "node:crypto";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig, devices } from "@playwright/test";
@@ -43,6 +44,8 @@ export default defineConfig({
         NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
         NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
           process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "",
+        // Clé maîtresse jetable, générée à chaque exécution (exigée en mode production).
+        SECRETS_ENCRYPTION_KEY: randomBytes(32).toString("base64"),
       },
       reuseExistingServer: !process.env.CI,
     },
