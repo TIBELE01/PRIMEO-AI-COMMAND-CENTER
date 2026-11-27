@@ -1,0 +1,22 @@
+{
+  "name": "@primeo/llm",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Abstraction multi-fournisseurs des modèles d'IA (OpenAI, Anthropic…).",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@primeo/config": "workspace:*"
+  },
+  "devDependencies": {
+    "@primeo/eslint-config": "workspace:*",
+    "@primeo/tsconfig": "workspace:*"
+  }
+}

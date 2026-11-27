@@ -1,0 +1,2 @@
+-- Données d'initialisation pour l'environnement LOCAL uniquement.
+-- Les définitions de directions et d'agents proviennent de /catalog et sont synchronisées par script.

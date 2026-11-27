@@ -1,0 +1,37 @@
+{
+  "name": "@primeo/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Interface du PDG : Executive Dashboard et modules du Command Center.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:e2e": "playwright test --trace off",
+    "clean": "rm -rf .next"
+  },
+  "dependencies": {
+    "@primeo/config": "workspace:*",
+    "@primeo/db": "workspace:*",
+    "@primeo/domain": "workspace:*",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.2",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "@primeo/eslint-config": "workspace:*",
+    "@primeo/tsconfig": "workspace:*",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "eslint-config-next": "16.4.6",
+    "tailwindcss": "4.3.5"
+  }
+}

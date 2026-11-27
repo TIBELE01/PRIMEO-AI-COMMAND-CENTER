@@ -1,0 +1,27 @@
+{
+  "name": "@primeo/agent-runtime",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Exécution des agents : boucle de raisonnement, mémoire, délégation, collaboration.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@primeo/domain": "workspace:*",
+    "@primeo/db": "workspace:*",
+    "@primeo/governance": "workspace:*",
+    "@primeo/llm": "workspace:*",
+    "@primeo/tools": "workspace:*",
+    "@primeo/observability": "workspace:*"
+  },
+  "devDependencies": {
+    "@primeo/eslint-config": "workspace:*",
+    "@primeo/tsconfig": "workspace:*"
+  }
+}

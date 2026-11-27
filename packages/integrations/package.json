@@ -1,0 +1,22 @@
+{
+  "name": "@primeo/integrations",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Connecteurs vers les services externes : Zoho, n8n, ElevenLabs, serveurs MCP.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@primeo/config": "workspace:*"
+  },
+  "devDependencies": {
+    "@primeo/eslint-config": "workspace:*",
+    "@primeo/tsconfig": "workspace:*"
+  }
+}

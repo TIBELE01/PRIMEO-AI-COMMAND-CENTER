@@ -1,0 +1,26 @@
+{
+  "name": "@primeo/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Processus de fond 24/7 : file de tâches, planification, exécution des agents.",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@primeo/agent-runtime": "workspace:*",
+    "@primeo/config": "workspace:*",
+    "@primeo/db": "workspace:*",
+    "@primeo/governance": "workspace:*",
+    "@primeo/observability": "workspace:*"
+  },
+  "devDependencies": {
+    "@primeo/eslint-config": "workspace:*",
+    "@primeo/tsconfig": "workspace:*",
+    "tsx": "4.23.15"
+  }
+}

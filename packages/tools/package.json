@@ -1,0 +1,24 @@
+{
+  "name": "@primeo/tools",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Registre des outils mis à disposition des agents, chacun déclaré avec son niveau de risque.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@primeo/domain": "workspace:*",
+    "@primeo/governance": "workspace:*",
+    "@primeo/integrations": "workspace:*"
+  },
+  "devDependencies": {
+    "@primeo/eslint-config": "workspace:*",
+    "@primeo/tsconfig": "workspace:*"
+  }
+}

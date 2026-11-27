@@ -1,0 +1,14 @@
+{
+  "name": "@primeo/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base": "./base.mjs"
+  },
+  "peerDependencies": {
+    "@eslint/js": "*",
+    "eslint": "*",
+    "typescript-eslint": "*"
+  }
+}
