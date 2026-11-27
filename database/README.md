@@ -17,5 +17,15 @@ plateforme immobilière).
 - Le journal d'activité est en ajout seul : ni mise à jour, ni suppression.
 - Après chaque migration, régénérer les types dans `packages/integrations/supabase/`.
 
+## Tester les migrations
+
+```bash
+TEST_DATABASE_URL=postgres://postgres:postgres@127.0.0.1:54322/postgres pnpm test:integration
+```
+
+Une base jetable est créée, toutes les migrations y sont appliquées, puis les garanties du schéma
+(RLS, journal infalsifiable, circuit de validation…) sont vérifiées. Il faut un PostgreSQL 16+
+avec l'extension `pgvector`.
+
 > La CLI Supabase attend par défaut un dossier `supabase/`. Son raccordement à `database/`
-> sera configuré lors de la mise en place de l'environnement local.
+> sera configuré lors de la création du projet Supabase.

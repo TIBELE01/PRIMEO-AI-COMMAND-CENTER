@@ -8,5 +8,7 @@
 | `governance/`   | Niveaux d'autorisation, circuit de validation, sécurité, secrets, traçabilité                 |
 | `deployment/`   | Environnements, procédures de déploiement, exploitation et reprise après incident             |
 
+Schéma de la base de données : [`database-schema.md`](./database-schema.md).
+
 Cahier des charges initial : [`Contexte.MD`](../Contexte.MD).
 Nouvelle décision d'architecture : copier `architecture/decisions/0000-modele.md` sous le numéro suivant.
