@@ -1,0 +1,23 @@
+{
+  "name": "@primeo/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API du Command Center : point d'entrée unique de toutes les opérations métier.",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "start": "tsx src/main.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@primeo/agent-system": "workspace:*",
+    "@primeo/integrations": "workspace:*",
+    "@primeo/orchestration": "workspace:*",
+    "@primeo/security": "workspace:*",
+    "@primeo/shared": "workspace:*",
+    "fastify": "5.12.8"
+  },
+  "devDependencies": {
+    "tsx": "4.23.15"
+  }
+}

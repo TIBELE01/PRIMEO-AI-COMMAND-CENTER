@@ -1,0 +1,16 @@
+{
+  "name": "@primeo/security",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Permissions des agents, niveaux d'autorisation, règles de validation et gestion des secrets.",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@primeo/shared": "workspace:*"
+  }
+}

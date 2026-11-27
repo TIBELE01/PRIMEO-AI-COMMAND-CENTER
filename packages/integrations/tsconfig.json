@@ -1,4 +1,4 @@
 {
-  "extends": "@primeo/tsconfig/library.json",
-  "include": ["src"]
+  "extends": "../../tsconfig.base.json",
+  "include": ["**/*.ts"]
 }

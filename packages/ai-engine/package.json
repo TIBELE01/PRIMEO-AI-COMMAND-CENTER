@@ -1,0 +1,17 @@
+{
+  "name": "@primeo/ai-engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Moteur d'IA multi-fournisseurs : OpenAI, Anthropic, ElevenLabs, routage, mémoire.",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@primeo/shared": "workspace:*",
+    "@primeo/security": "workspace:*"
+  }
+}

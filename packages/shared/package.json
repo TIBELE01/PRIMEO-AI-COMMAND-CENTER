@@ -1,0 +1,14 @@
+{
+  "name": "@primeo/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Types, constantes, schémas de validation et utilitaires communs à tout le système.",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {}
+}

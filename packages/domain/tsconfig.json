@@ -1,4 +1,0 @@
-{
-  "extends": "@primeo/tsconfig/library.json",
-  "include": ["src"]
-}

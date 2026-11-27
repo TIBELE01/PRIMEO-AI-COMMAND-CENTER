@@ -1,43 +1,30 @@
-# @primeo/web — interface du PDG
+# @primeo/web — interface du PDG (frontend)
 
-Application **Next.js (App Router)** : c'est le bureau central depuis lequel le PDG pilote Primeo.
-Accès privé, réservé au PDG authentifié (double authentification prévue).
+Application **Next.js** (App Router) : le bureau central depuis lequel le PDG pilote Primeo.
+Accès privé, réservé au PDG authentifié. Toutes les opérations passent par `apps/api`.
 
-## Organisation
+## Organisation de `src/`
 
-```
-src/
-├── app/                        Routage Next.js
-│   ├── (auth)/login/           Connexion
-│   ├── (command-center)/       Espace authentifié
-│   │   ├── dashboard/          A. Executive Dashboard
-│   │   ├── directors/          B. AI Directors
-│   │   ├── communications/     C. Communication Center
-│   │   ├── missions/           D. Mission Control
-│   │   ├── approvals/          E. Approval Center
-│   │   ├── performance/        F. Performance Center
-│   │   ├── reports/            G. Reports Center
-│   │   ├── activity/           H. Activity Logs
-│   │   └── settings/           Paramètres (organisation, agents, intégrations)
-├── features/<module>/          Composants et appels à l'API propres à chaque module
-├── components/ui/              Composants d'interface génériques (design system Primeo)
-├── components/layout/          Coquille de l'application : navigation, en-tête, responsive
-├── lib/api/                    Client typé vers l'API backend (`apps/backend`)
-├── lib/supabase/               Client Supabase limité à l'authentification
-├── lib/auth/                   Garde d'authentification et de session
-└── styles/                     Styles globaux et jetons de design
-e2e/                            Tests Playwright (ordinateur + smartphone)
-```
+| Dossier       | Rôle                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------ |
+| `app/`        | Routage Next.js : une route par module (dashboard, directeurs, missions, validations…)     |
+| `pages/`      | Écrans complets de chaque module, assemblés à partir des composants (voir l'avertissement) |
+| `layouts/`    | Gabarits de page : coquille authentifiée, navigation, version smartphone                   |
+| `components/` | Composants propres à l'application (les composants génériques sont dans `@primeo/ui`)      |
+| `hooks/`      | Hooks React réutilisables (données, temps réel, responsive…)                               |
+| `services/`   | Appels à l'API `apps/api` et à Supabase Auth ; seul endroit qui fait des requêtes réseau   |
+| `stores/`     | État global côté client (préférences, filtres, état d'interface)                           |
+| `contexts/`   | Contextes React : session du PDG, thème                                                    |
+| `styles/`     | Styles globaux                                                                             |
+| `utils/`      | Fonctions utilitaires propres au frontend                                                  |
+
+> **Avertissement — `src/pages/`** : Next.js interprète ce dossier comme le _Pages Router_.
+> Tout fichier `.tsx` qui y est placé devient une URL publique, en parallèle de `app/`.
+> Tant que ce nom est conservé, il ne doit contenir que des sous-dossiers de composants d'écran
+> **sans** fichier de route à la racine, ou être renommé (`views/`, `screens/`).
 
 ## Règles
 
-- L'interface est un **frontend pur** : toutes les opérations passent par l'API `apps/backend`.
-  Elle n'accède jamais directement à la base de données et n'exécute jamais un agent.
-- Aucun secret serveur dans un composant client. Seules les variables `NEXT_PUBLIC_*` sont exposées.
-- Un écran n'est livré que branché sur de vraies données (pas de données fictives présentées comme réelles).
-
-## Commandes
-
-```bash
-pnpm --filter @primeo/web dev
-```
+- Frontend pur : aucun accès direct à la base de données, aucun secret, aucun agent exécuté ici.
+- Seules les variables `NEXT_PUBLIC_*` sont exposées au navigateur.
+- Un écran n'est livré que branché sur de vraies données.

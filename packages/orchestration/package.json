@@ -1,0 +1,17 @@
+{
+  "name": "@primeo/orchestration",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Répartition des tâches, gestion des événements et workflows n8n.",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@primeo/shared": "workspace:*",
+    "@primeo/security": "workspace:*"
+  }
+}

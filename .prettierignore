@@ -5,5 +5,5 @@ coverage
 .turbo
 pnpm-lock.yaml
 supabase/.temp
-packages/db/src/types/database.types.ts
-n8n/workflows/**/*.json
+packages/integrations/supabase/database.types.ts
+packages/orchestration/workflows/**/*.json

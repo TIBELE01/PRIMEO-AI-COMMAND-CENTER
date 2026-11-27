@@ -1,0 +1,20 @@
+{
+  "name": "@primeo/agent-system",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Définition, enregistrement, capacités et collaboration des agents IA.",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@primeo/shared": "workspace:*",
+    "@primeo/security": "workspace:*",
+    "@primeo/ai-engine": "workspace:*",
+    "@primeo/orchestration": "workspace:*",
+    "@primeo/integrations": "workspace:*"
+  }
+}

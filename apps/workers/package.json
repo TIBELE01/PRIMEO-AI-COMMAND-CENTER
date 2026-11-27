@@ -1,0 +1,22 @@
+{
+  "name": "@primeo/workers",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Processus de fond 24/7 : tâches planifiées, exécution des agents, rapports, surveillance.",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "start": "tsx src/main.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@primeo/agent-system": "workspace:*",
+    "@primeo/integrations": "workspace:*",
+    "@primeo/orchestration": "workspace:*",
+    "@primeo/security": "workspace:*",
+    "@primeo/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "4.23.15"
+  }
+}

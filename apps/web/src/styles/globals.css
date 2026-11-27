@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
 /*
- * Jetons de design (couleurs, typographie, rayons…) de l'identité Primeo.
- * À définir à partir de la charte graphique Primeo.
+ * Styles globaux de l'application. Les jetons de design (couleurs, typographie…)
+ * proviennent de @primeo/ui/design-system.
  */

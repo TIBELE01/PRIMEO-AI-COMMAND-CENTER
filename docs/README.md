@@ -1,15 +1,12 @@
 # docs/
 
-Documentation du projet.
+| Dossier         | Contenu                                                                                       |
+| --------------- | --------------------------------------------------------------------------------------------- |
+| `architecture/` | Architecture générale, flux entre composants, schéma de données ; décisions dans `decisions/` |
+| `api/`          | Référence de l'API `apps/api` : routes, formats, codes d'erreur, authentification             |
+| `agents/`       | Fiches des directions et des agents : rôle, objectifs, capacités, niveau d'autorisation       |
+| `governance/`   | Niveaux d'autorisation, circuit de validation, sécurité, secrets, traçabilité                 |
+| `deployment/`   | Environnements, procédures de déploiement, exploitation et reprise après incident             |
 
-| Dossier         | Contenu                                                                    |
-| --------------- | -------------------------------------------------------------------------- |
-| `architecture/` | Architecture générale, schéma de données, flux entre agents                |
-| `adr/`          | Décisions d'architecture (Architecture Decision Records), numérotées       |
-| `security/`     | Modèle de menaces, gestion des secrets, permissions, conformité RGPD       |
-| `runbooks/`     | Procédures d'exploitation : relancer une tâche, révoquer une clé, incident |
-| `phases/`       | Plan de développement par phases et critères d'acceptation de chaque phase |
-
-Le cahier des charges initial reste à la racine du dépôt : [`Contexte.MD`](../Contexte.MD).
-
-Pour une nouvelle décision : copier `adr/0000-modele.md` sous le numéro suivant.
+Cahier des charges initial : [`Contexte.MD`](../Contexte.MD).
+Nouvelle décision d'architecture : copier `architecture/decisions/0000-modele.md` sous le numéro suivant.

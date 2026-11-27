@@ -10,13 +10,11 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
-    "test:e2e": "playwright test --trace off",
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@primeo/config": "workspace:*",
-    "@primeo/domain": "workspace:*",
+    "@primeo/shared": "workspace:*",
+    "@primeo/ui": "workspace:*",
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.119.2",
     "next": "16.4.6",
@@ -24,12 +22,10 @@
     "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@playwright/test": "1.65.1",
-    "@primeo/eslint-config": "workspace:*",
-    "@primeo/tsconfig": "workspace:*",
     "@tailwindcss/postcss": "4.3.5",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
+    "eslint": "9.39.5",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.5"
   }

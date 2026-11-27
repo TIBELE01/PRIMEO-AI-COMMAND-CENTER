@@ -3,20 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Connecteurs vers les services externes : Zoho, n8n, ElevenLabs, serveurs MCP.",
+  "description": "Connecteurs vers les services externes : Zoho, Supabase, MCP, e-mail, API tierces.",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./index.ts"
   },
   "scripts": {
-    "lint": "eslint src",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@primeo/config": "workspace:*"
-  },
-  "devDependencies": {
-    "@primeo/eslint-config": "workspace:*",
-    "@primeo/tsconfig": "workspace:*"
+    "@primeo/shared": "workspace:*",
+    "@primeo/security": "workspace:*"
   }
 }

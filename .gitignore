@@ -161,6 +161,7 @@ vite.config.ts.timestamp-*
 next-env.d.ts
 *.tsbuildinfo
 # Supabase CLI (état local)
+database/.temp/
 supabase/.temp/
 supabase/.branches/
 # Playwright
@@ -169,3 +170,5 @@ test-results/
 blob-report/
 # Hébergeurs
 .vercel
+tests/e2e/test-results/
+tests/e2e/playwright-report/
