@@ -11,7 +11,7 @@ export default function ForgotPasswordPage() {
       title="Mot de passe oublié"
       description="Indiquez votre adresse e-mail : vous recevrez un lien pour définir un nouveau mot de passe."
       footer={
-        <Link href="/login" className="font-medium text-accent hover:underline">
+        <Link href="/login" className="font-medium text-brand-ink hover:underline">
           Retour à la connexion
         </Link>
       }

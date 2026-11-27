@@ -1,3 +1,4 @@
+import { Badge } from "@primeo/ui";
 import type { ApiHealth } from "@/services/api-client";
 
 /** Affiche l'état réel de la connexion entre l'interface et l'API. */
@@ -7,16 +8,17 @@ export function ApiStatus({ health }: { health: ApiHealth }) {
     <div
       data-testid="api-status"
       data-state={online ? "online" : "offline"}
-      className="flex items-center gap-3 rounded-xl border border-line bg-surface px-4 py-3 text-sm"
+      className="flex items-center justify-between gap-3 px-5 py-4"
     >
-      <span
-        aria-hidden
-        className={`h-2.5 w-2.5 shrink-0 rounded-full ${online ? "bg-success" : "bg-danger"}`}
-      />
-      <span className="font-medium text-ink">API</span>
-      <span className="text-muted">
-        {online ? `Opérationnelle · ${health.data.environment}` : "Injoignable"}
-      </span>
+      <div className="flex flex-col">
+        <span className="text-sm font-medium text-ink">API du Command Center</span>
+        <span className="text-xs text-subtle">
+          {online ? `Environnement : ${health.data.environment}` : "Aucune réponse de l'API"}
+        </span>
+      </div>
+      <Badge tone={online ? "success" : "danger"} dot>
+        {online ? "Opérationnelle" : "Injoignable"}
+      </Badge>
     </div>
   );
 }

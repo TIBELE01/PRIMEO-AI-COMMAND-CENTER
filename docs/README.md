@@ -11,6 +11,7 @@
 Schéma de la base de données : [`database-schema.md`](./database-schema.md).
 Authentification et accès aux données : [`architecture/authentication.md`](./architecture/authentication.md).
 Moteur d'IA multi-fournisseurs : [`architecture/ai-engine.md`](./architecture/ai-engine.md).
+Design system et charte graphique : [`design-system.md`](./design-system.md).
 
 Cahier des charges initial : [`Contexte.MD`](../Contexte.MD).
 Nouvelle décision d'architecture : copier `architecture/decisions/0000-modele.md` sous le numéro suivant.

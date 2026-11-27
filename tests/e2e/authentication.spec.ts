@@ -80,3 +80,10 @@ test("l'API répond sur sa route de santé et protège ses routes privées", asy
   const me = await request.get("http://127.0.0.1:4000/me");
   expect(me.status()).toBe(401);
 });
+
+test("la page de référence du design system est réservée aux personnes connectées", async ({
+  page,
+}) => {
+  await page.goto("/design-system");
+  await expect(page).toHaveURL(/\/login\?next=%2Fdesign-system/);
+});

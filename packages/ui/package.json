@@ -5,7 +5,8 @@
   "type": "module",
   "description": "Design system Primeo : composants d'interface et graphiques partagés.",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./theme.css": "./design-system/theme.css"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

@@ -32,7 +32,7 @@ export function LoginForm({ next, notice }: { next: string; notice?: string | un
         error={state.fieldErrors?.password}
       />
       <div className="flex justify-end">
-        <Link href="/forgot-password" className="text-sm text-accent hover:underline">
+        <Link href="/forgot-password" className="text-sm text-brand-ink hover:underline">
           Mot de passe oublié ?
         </Link>
       </div>

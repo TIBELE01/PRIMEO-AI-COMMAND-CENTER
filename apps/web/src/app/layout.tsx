@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { APP_NAME } from "@primeo/shared";
+import "@fontsource-variable/inter";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {

@@ -23,7 +23,7 @@ export default async function LoginPage({
       footer={
         <>
           Vous avez reçu une invitation ?{" "}
-          <Link href="/signup" className="font-medium text-accent hover:underline">
+          <Link href="/signup" className="font-medium text-brand-ink hover:underline">
             Créer votre compte
           </Link>
         </>

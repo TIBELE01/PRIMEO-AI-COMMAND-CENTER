@@ -26,19 +26,20 @@ export function TextField({ label, error, hint, id, className, ...props }: TextF
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy || undefined}
         className={cx(
-          "h-11 w-full rounded-lg border bg-surface px-3 text-base text-ink sm:text-sm",
-          "placeholder:text-muted/70 focus:outline-2 focus:outline-offset-1 focus:outline-accent",
-          error ? "border-danger" : "border-line",
+          "h-11 w-full rounded-md border bg-surface px-3.5 text-base text-ink shadow-xs sm:text-sm",
+          "transition duration-200 ease-premium placeholder:text-subtle",
+          "hover:border-line-strong focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/15",
+          error ? "border-danger focus:border-danger focus:ring-danger/15" : "border-line",
           className,
         )}
       />
       {hint && !error ? (
-        <p id={`${inputId}-hint`} className="text-xs text-muted">
+        <p id={`${inputId}-hint`} className="text-xs leading-relaxed text-subtle">
           {hint}
         </p>
       ) : null}
       {error ? (
-        <p id={`${inputId}-error`} className="text-xs text-danger">
+        <p id={`${inputId}-error`} className="text-xs font-medium text-danger-ink">
           {error}
         </p>
       ) : null}
