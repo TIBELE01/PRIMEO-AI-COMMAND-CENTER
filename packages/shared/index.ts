@@ -1,2 +1,3 @@
-// @primeo/shared — point d'entrée public du paquet. Aucune logique implémentée à ce stade.
-export {};
+// @primeo/shared — point d'entrée public, utilisable partout (navigateur compris).
+export * from "./constants/application";
+export * from "./schemas/health";

@@ -9,7 +9,14 @@ validations humaines, traçabilité complète).
 
 ## État du projet
 
-**Phase 0 — structure du dépôt.** Aucun module métier n'est encore implémenté.
+**Phase 0 — socle technique.** Le frontend, l'API et les workers démarrent et communiquent ;
+aucun module métier n'est encore implémenté.
+
+| Service  | Adresse locale               | Technologie                          |
+| -------- | ---------------------------- | ------------------------------------ |
+| Frontend | http://localhost:3000        | Next.js 16, React 19, Tailwind CSS 4 |
+| API      | http://localhost:4000/health | Fastify 5                            |
+| Workers  | (processus de fond)          | Node.js 22                           |
 
 ## Arborescence
 
@@ -69,6 +76,7 @@ pnpm dev
 | ---------------- | -------------------------------------------- |
 | `pnpm dev`       | Lance le frontend, l'API et les workers      |
 | `pnpm build`     | Compile les applications                     |
+| `pnpm start`     | Lance les versions compilées                 |
 | `pnpm lint`      | Analyse statique                             |
 | `pnpm typecheck` | Vérification des types                       |
 | `pnpm test`      | Tests unitaires, d'intégration et des agents |

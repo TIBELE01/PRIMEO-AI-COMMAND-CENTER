@@ -18,10 +18,11 @@
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
     "test:agents": "vitest run tests/agents",
-    "test:e2e": "playwright test -c tests/e2e/playwright.config.ts --trace off",
+    "test:e2e": "turbo run build --filter=@primeo/web --filter=@primeo/api && playwright test -c tests/e2e/playwright.config.ts --trace off",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "turbo run clean && rm -rf node_modules",
+    "start": "turbo run start"
   },
   "devDependencies": {
     "@eslint/js": "9.39.5",

@@ -19,6 +19,12 @@
     },
     "clean": {
       "cache": false
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true
     }
-  }
+  },
+  "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_API_URL"]
 }

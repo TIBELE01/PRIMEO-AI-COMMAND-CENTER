@@ -5,10 +5,13 @@
   "type": "module",
   "description": "Types, constantes, schémas de validation et utilitaires communs à tout le système.",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./node": "./node.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {}
+  "dependencies": {
+    "zod": "4.6.7"
+  }
 }
