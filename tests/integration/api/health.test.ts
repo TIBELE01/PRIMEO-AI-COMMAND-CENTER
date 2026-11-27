@@ -7,7 +7,14 @@ describe("API — socle", () => {
   let app: Awaited<ReturnType<typeof buildApp>>;
 
   beforeAll(async () => {
-    app = await buildApp(parseApiEnv({ NODE_ENV: "test", APP_URL: "http://localhost:3000" }));
+    app = await buildApp(
+      parseApiEnv({
+        NODE_ENV: "test",
+        APP_URL: "http://localhost:3000",
+        SUPABASE_URL: "https://projet.supabase.co",
+        SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
+      }),
+    );
     await app.ready();
   });
 

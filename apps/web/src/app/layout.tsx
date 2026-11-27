@@ -4,7 +4,7 @@ import { APP_NAME } from "@primeo/shared";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: APP_NAME,
+  title: { default: APP_NAME, template: `%s · ${APP_NAME}` },
   description: "Centre de commandement de Primeo.",
   robots: { index: false, follow: false },
 };

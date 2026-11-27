@@ -98,11 +98,16 @@ export async function insertUser(
 ): Promise<string> {
   const id = randomUUID();
   const email = `${id}@test.primeo.local`;
-  await client.query("insert into auth.users (id, email) values ($1, $2)", [id, email]);
-  await client.query(
-    "insert into public.users (id, email, full_name, role) values ($1, $2, $3, $4)",
-    [id, email, `Utilisateur ${role}`, role],
-  );
+  // Parcours réel : invitation, puis création du compte Auth (le profil est créé par déclencheur).
+  await client.query("insert into public.user_invitations (email, role) values ($1, $2)", [
+    email,
+    role,
+  ]);
+  await client.query("insert into auth.users (id, email, raw_user_meta_data) values ($1, $2, $3)", [
+    id,
+    email,
+    { full_name: `Utilisateur ${role}` },
+  ]);
   return id;
 }
 

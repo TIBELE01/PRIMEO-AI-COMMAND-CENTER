@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
+/* Les composants du design system (@primeo/ui) utilisent aussi des classes Tailwind. */
+@source "../../../../packages/ui";
+
 /*
- * Jetons de design provisoires. Ils seront remplacés par ceux de la charte Primeo
- * (@primeo/ui/design-system) dès qu'elle sera disponible.
+ * Jetons de design provisoires (contrat : packages/ui/design-system/tokens.ts). Ils seront
+ * remplacés par ceux de la charte Primeo dès qu'elle sera disponible.
  */
 @theme {
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -12,6 +15,7 @@
   --color-ink: #18181b;
   --color-muted: #52525b;
   --color-accent: #1d4ed8;
+  --color-accent-ink: #ffffff;
   --color-success: #16a34a;
   --color-danger: #dc2626;
 }
@@ -24,6 +28,7 @@
     --color-ink: #f4f4f5;
     --color-muted: #a1a1aa;
     --color-accent: #60a5fa;
+    --color-accent-ink: #0b0b0d;
     --color-success: #22c55e;
     --color-danger: #f87171;
   }

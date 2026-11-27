@@ -10,7 +10,7 @@ immobilière). Le schéma est défini **exclusivement** par les migrations de
 1. [Principes de conception](#1-principes-de-conception)
 2. [Vue d'ensemble](#2-vue-densemble)
 3. [Types communs](#3-types-communs)
-4. [Identité et organisation](#4-identité-et-organisation) — `users`, `departments`, `agents`
+4. [Identité et organisation](#4-identité-et-organisation) — `users`, `user_invitations`, `departments`, `agents`
 5. [Intégrations et secrets](#5-intégrations-et-secrets) — `integrations`, `integration_secrets`
 6. [Gouvernance](#6-gouvernance) — `capabilities`, `agent_permissions`
 7. [Missions et exécution](#7-missions-et-exécution) — `missions`, `mission_assignments`, `mission_events`, `mission_schedules`, `jobs`
@@ -93,7 +93,7 @@ erDiagram
     activity_logs }o--|| users : "acteur"
 ```
 
-24 tables, réparties en 10 domaines fonctionnels.
+25 tables, réparties en 10 domaines fonctionnels.
 
 ## 3. Types communs
 
@@ -157,6 +157,26 @@ Prolonge `auth.users` (Supabase Auth) avec le profil et le rôle applicatif.
 | `is_active`                | `boolean`     | défaut `true`                      | Un compte désactivé perd immédiatement tout accès |
 | `last_seen_at`             | `timestamptz` |                                    | Dernière activité                                 |
 | `created_at`, `updated_at` | `timestamptz` |                                    |                                                   |
+
+### `user_invitations` — invitations
+
+Migration : `20261127001200_user_invitations.sql`. L'inscription n'est possible **que sur
+invitation** : un déclencheur sur `auth.users` refuse toute création de compte sans invitation
+valide, puis crée le profil `users` avec le rôle prévu et consomme l'invitation.
+
+| Colonne                           | Type          | Contraintes                                              | Description                                                           |
+| --------------------------------- | ------------- | -------------------------------------------------------- | --------------------------------------------------------------------- |
+| `id`                              | `uuid`        | PK                                                       |                                                                       |
+| `email`                           | `text`        | en minuscules ; une seule invitation ouverte par adresse | Adresse invitée                                                       |
+| `role`                            | `user_role`   | non nul                                                  | Rôle attribué à la création du compte                                 |
+| `invited_by_user_id`              | `uuid`        | FK → `users.id` (set null)                               |                                                                       |
+| `expires_at`                      | `timestamptz` | défaut : +14 jours                                       |                                                                       |
+| `accepted_at`, `accepted_user_id` |               | `accepted_user_id` ⇒ `accepted_at`                       | Consommation (l'invitation reste consommée si le compte est supprimé) |
+| `revoked_at`                      | `timestamptz` |                                                          | Révocation                                                            |
+| `created_at`                      | `timestamptz` |                                                          |                                                                       |
+
+Index : unique partiel sur `email` (invitations ouvertes), `invited_by_user_id`, `accepted_user_id`.
+Lecture réservée au dirigeant ; aucune écriture par les rôles exposés.
 
 ### `departments` — directions
 

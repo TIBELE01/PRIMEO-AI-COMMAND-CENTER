@@ -5,13 +5,15 @@
   "type": "module",
   "description": "Connecteurs vers les services externes : Zoho, Supabase, MCP, e-mail, API tierces.",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./supabase": "./supabase/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@primeo/security": "workspace:*",
     "@primeo/shared": "workspace:*",
-    "@primeo/security": "workspace:*"
+    "@supabase/supabase-js": "2.119.2"
   }
 }

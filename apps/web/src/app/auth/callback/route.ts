@@ -1,0 +1,48 @@
+import { safeRedirectPath } from "@primeo/shared";
+import type { EmailOtpType } from "@supabase/supabase-js";
+import { NextResponse, type NextRequest } from "next/server";
+import { createSupabaseServerClient } from "@/services/supabase/server";
+
+const OTP_TYPES: EmailOtpType[] = [
+  "signup",
+  "invite",
+  "magiclink",
+  "recovery",
+  "email_change",
+  "email",
+];
+
+/**
+ * Point d'arrivée des liens envoyés par e-mail (confirmation d'inscription, réinitialisation
+ * du mot de passe). Échange le code reçu contre une session, puis redirige vers `next`.
+ */
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl;
+  const next = safeRedirectPath(searchParams.get("next"));
+  const code = searchParams.get("code");
+  const tokenHash = searchParams.get("token_hash");
+  const type = searchParams.get("type") as EmailOtpType | null;
+
+  const supabase = await createSupabaseServerClient();
+  let succeeded = false;
+
+  if (code) {
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    succeeded = !error;
+  } else if (tokenHash && type && OTP_TYPES.includes(type)) {
+    const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
+    succeeded = !error;
+  }
+
+  const destination = request.nextUrl.clone();
+  destination.search = "";
+  if (succeeded) {
+    const target = new URL(next, request.nextUrl.origin);
+    destination.pathname = target.pathname;
+    destination.search = target.search;
+  } else {
+    destination.pathname = "/login";
+    destination.searchParams.set("error", "link_invalid");
+  }
+  return NextResponse.redirect(destination);
+}

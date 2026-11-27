@@ -1,13 +1,12 @@
 import { existsSync } from "node:fs";
 
 /**
- * Charge un fichier `.env` dans `process.env` (hors production), sans écraser les variables
- * déjà définies. En production, les variables sont fournies par l'hébergeur.
+ * Charge un fichier `.env` dans `process.env` s'il existe. Les variables déjà définies ne sont
+ * jamais remplacées : en production, celles de l'hébergeur s'appliquent.
  * Réservé aux processus Node.js : ne pas importer côté navigateur.
  */
 export function loadEnvFile(path: string): void {
-  if (process.env.NODE_ENV === "production" || !existsSync(path)) {
-    return;
+  if (existsSync(path)) {
+    process.loadEnvFile(path);
   }
-  process.loadEnvFile(path);
 }

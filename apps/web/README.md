@@ -23,6 +23,17 @@ Accès privé, réservé au PDG authentifié. Toutes les opérations passent par
 > Tant que ce nom est conservé, il ne doit contenir que des sous-dossiers de composants d'écran
 > **sans** fichier de route à la racine, ou être renommé (`views/`, `screens/`).
 
+## Authentification
+
+- `src/proxy.ts` : rafraîchit la session Supabase et protège les routes privées.
+- `src/app/(auth)/` : connexion, inscription (sur invitation), mot de passe oublié, réinitialisation.
+- `src/app/auth/` : retour des liens e-mail (`callback`) et fermeture d'une session non autorisée (`denied`).
+- `src/app/(command-center)/` : espace privé, revérifié côté serveur par son layout.
+- `src/services/supabase/` : clients Supabase navigateur, serveur et proxy.
+- `src/services/auth/` : actions serveur, utilisateur courant, messages d'erreur.
+
+Détails : [`docs/architecture/authentication.md`](../../docs/architecture/authentication.md).
+
 ## Règles
 
 - Frontend pur : aucun accès direct à la base de données, aucun secret, aucun agent exécuté ici.

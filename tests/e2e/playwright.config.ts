@@ -1,4 +1,12 @@
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { defineConfig, devices } from "@playwright/test";
+
+// Variables locales (Supabase…) lues depuis le .env racine s'il existe.
+const rootEnvFile = resolve(import.meta.dirname, "../../.env");
+if (existsSync(rootEnvFile)) {
+  process.loadEnvFile(rootEnvFile);
+}
 
 // Chemin optionnel vers un Chromium déjà installé (environnements sans téléchargement de navigateur).
 const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
@@ -28,7 +36,14 @@ export default defineConfig({
     {
       command: "pnpm --filter @primeo/api start",
       url: "http://127.0.0.1:4000/health",
-      env: { NODE_ENV: "production", API_PORT: "4000", APP_URL: "http://localhost:3000" },
+      env: {
+        NODE_ENV: "production",
+        API_PORT: "4000",
+        APP_URL: "http://localhost:3000",
+        NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
+          process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "",
+      },
       reuseExistingServer: !process.env.CI,
     },
     {

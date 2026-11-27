@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
   applySeeds,
@@ -35,6 +36,7 @@ const EXPECTED_TABLES = [
   "notifications",
   "objectives",
   "reports",
+  "user_invitations",
   "users",
 ];
 
@@ -84,6 +86,93 @@ describe.skipIf(!TEST_DATABASE_URL)("Base de données — migrations et garantie
           "technique-si",
         ]);
       });
+    });
+  });
+
+  describe("inscription sur invitation", () => {
+    async function signUp(email: string, fullName = "Personne invitée") {
+      const id = randomUUID();
+      await db.client.query(
+        "insert into auth.users (id, email, raw_user_meta_data) values ($1, $2, $3)",
+        [id, email, { full_name: fullName }],
+      );
+      return id;
+    }
+
+    it("refuse la création d'un compte sans invitation", async () => {
+      await expect(inRollback(db.client, () => signUp("inconnu@exemple.test"))).rejects.toThrow(
+        /aucune invitation valide/,
+      );
+    });
+
+    it("crée le profil avec le rôle de l'invitation et consomme l'invitation", async () => {
+      await inRollback(db.client, async () => {
+        await db.client.query(
+          "insert into public.user_invitations (email, role) values ('pdg@exemple.test', 'executive')",
+        );
+        const id = await signUp("PDG@Exemple.test", "Président-directeur général");
+        const user = await db.client.query(
+          "select email, full_name, role, is_active from public.users where id = $1",
+          [id],
+        );
+        expect(user.rows[0]).toEqual({
+          email: "pdg@exemple.test",
+          full_name: "Président-directeur général",
+          role: "executive",
+          is_active: true,
+        });
+        const invitation = await db.client.query<{ accepted_user_id: string }>(
+          "select accepted_user_id from public.user_invitations where email = 'pdg@exemple.test'",
+        );
+        expect(invitation.rows[0]!.accepted_user_id).toBe(id);
+      });
+    });
+
+    it("n'accepte pas deux comptes pour une même invitation", async () => {
+      await expect(
+        inRollback(db.client, async () => {
+          await db.client.query(
+            "insert into public.user_invitations (email, role) values ('unique@exemple.test', 'observer')",
+          );
+          await signUp("unique@exemple.test");
+          await signUp("unique@exemple.test");
+        }),
+      ).rejects.toThrow(/aucune invitation valide/);
+    });
+
+    it("conserve l'invitation consommée si le compte est supprimé", async () => {
+      await inRollback(db.client, async () => {
+        await db.client.query(
+          "insert into public.user_invitations (email, role) values ('depart@exemple.test', 'observer')",
+        );
+        const id = await signUp("depart@exemple.test");
+        await db.client.query("delete from auth.users where id = $1", [id]);
+        const { rows } = await db.client.query<{ accepted_at: Date | null }>(
+          "select accepted_at from public.user_invitations where email = 'depart@exemple.test'",
+        );
+        expect(rows[0]!.accepted_at).not.toBeNull();
+      });
+    });
+
+    it("refuse une invitation expirée ou révoquée", async () => {
+      await expect(
+        inRollback(db.client, async () => {
+          await db.client.query(
+            `insert into public.user_invitations (email, role, expires_at)
+             values ('expire@exemple.test', 'observer', now() - interval '1 day')`,
+          );
+          await signUp("expire@exemple.test");
+        }),
+      ).rejects.toThrow(/aucune invitation valide/);
+      await expect(
+        inRollback(db.client, async () => {
+          await db.client.query(
+            `insert into public.user_invitations (email, role, revoked_at)
+             values ('revoque@exemple.test', 'observer', now())`,
+          );
+          await signUp("revoque@exemple.test");
+        }),
+      ).rejects.toThrow(/aucune invitation valide/);
     });
   });
 
