@@ -65,8 +65,8 @@ describe("API — authentification", () => {
     app = await buildApp(
       parseApiEnv({
         NODE_ENV: "test",
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
+        NEXT_PUBLIC_SUPABASE_URL: SUPABASE_URL,
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
       }),
       {
         verifyAccessToken: createAccessTokenVerifier({

@@ -1,3 +1,4 @@
+import { redactSecrets } from "@primeo/security/secrets";
 import type { FastifyError, FastifyInstance } from "fastify";
 
 /**
@@ -15,7 +16,11 @@ export function registerErrorHandling(app: FastifyInstance): void {
   app.setErrorHandler((error: FastifyError, request, reply) => {
     const statusCode = error.statusCode ?? 500;
     if (statusCode >= 500) {
-      request.log.error({ err: error }, "Erreur interne");
+      // Le message d'erreur peut contenir une clé ou un jeton : il est masqué avant journalisation.
+      request.log.error(
+        { error: { name: error.name, message: redactSecrets(error.message), code: error.code } },
+        "Erreur interne",
+      );
       void reply
         .status(500)
         .send({ error: "internal_error", message: "Erreur interne du serveur." });

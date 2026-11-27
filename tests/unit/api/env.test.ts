@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { parseApiEnv } from "../../../apps/api/src/config/env";
 
 const SUPABASE = {
-  SUPABASE_URL: "https://projet.supabase.co",
-  SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
+  NEXT_PUBLIC_SUPABASE_URL: "https://projet.supabase.co",
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
 };
 
 describe("parseApiEnv", () => {
@@ -15,7 +15,8 @@ describe("parseApiEnv", () => {
       API_HOST: "127.0.0.1",
       API_PORT: 4000,
       APP_URL: "http://localhost:3000",
-      ...SUPABASE,
+      SUPABASE_URL: "https://projet.supabase.co",
+      SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
     });
   });
 
@@ -36,14 +37,6 @@ describe("parseApiEnv", () => {
   });
 
   it("exige la configuration Supabase", () => {
-    expect(() => parseApiEnv({})).toThrow(/SUPABASE_URL/);
-  });
-
-  it("réutilise les variables publiques du frontend si besoin", () => {
-    const env = parseApiEnv({
-      NEXT_PUBLIC_SUPABASE_URL: "https://projet.supabase.co",
-      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
-    });
-    expect(env.SUPABASE_URL).toBe("https://projet.supabase.co");
+    expect(() => parseApiEnv({})).toThrow(/NEXT_PUBLIC_SUPABASE_URL/);
   });
 });

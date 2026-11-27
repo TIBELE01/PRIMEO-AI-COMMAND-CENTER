@@ -27,8 +27,8 @@ jobs:
           --health-retries 10
     env:
       TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-      NEXT_PUBLIC_SUPABASE_URL: https://gidnykqxuwmalixuxbck.supabase.co
-      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_IShrRvtPeUiuGx2onYOUHw_IqN8qQUa
+      NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -50,8 +50,8 @@ jobs:
     # Valeurs PUBLIQUES du projet Supabase (déjà exposées au navigateur) : les tests vérifient
     # notamment qu'une connexion inconnue et une inscription sans invitation sont refusées.
     env:
-      NEXT_PUBLIC_SUPABASE_URL: https://gidnykqxuwmalixuxbck.supabase.co
-      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_IShrRvtPeUiuGx2onYOUHw_IqN8qQUa
+      NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

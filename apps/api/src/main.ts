@@ -1,11 +1,22 @@
 import { fileURLToPath } from "node:url";
 import { loadEnvFile } from "@primeo/shared/node";
+import { EnvironmentValidationError } from "@primeo/security/secrets";
 import { buildApp } from "./app";
-import { parseApiEnv } from "./config/env";
+import { parseApiEnv, type ApiEnv } from "./config/env";
 
 loadEnvFile(fileURLToPath(new URL("../../../.env", import.meta.url)));
 
-const env = parseApiEnv();
+let env: ApiEnv;
+try {
+  env = parseApiEnv();
+} catch (error) {
+  if (error instanceof EnvironmentValidationError) {
+    console.error(error.message);
+    process.exit(1);
+  }
+  throw error;
+}
+
 const app = await buildApp(env);
 
 async function shutdown(signal: string): Promise<void> {

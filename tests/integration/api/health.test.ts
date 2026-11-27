@@ -11,8 +11,8 @@ describe("API — socle", () => {
       parseApiEnv({
         NODE_ENV: "test",
         APP_URL: "http://localhost:3000",
-        SUPABASE_URL: "https://projet.supabase.co",
-        SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
+        NEXT_PUBLIC_SUPABASE_URL: "https://projet.supabase.co",
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
       }),
     );
     await app.ready();

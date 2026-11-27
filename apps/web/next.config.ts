@@ -11,7 +11,7 @@ if (existsSync(rootEnvFile)) {
 
 const nextConfig: NextConfig = {
   // Les paquets internes sont consommés en TypeScript source.
-  transpilePackages: ["@primeo/integrations", "@primeo/shared", "@primeo/ui"],
+  transpilePackages: ["@primeo/integrations", "@primeo/security", "@primeo/shared", "@primeo/ui"],
   poweredByHeader: false,
 };
 

@@ -18,10 +18,19 @@ function loggerOptions(env: ApiEnv): FastifyLoggerOptions | false {
   if (env.NODE_ENV === "test") {
     return false;
   }
+  // Les en-têtes porteurs de secrets ne sont jamais journalisés.
+  const redact = {
+    paths: ["req.headers.authorization", "req.headers.cookie"],
+    censor: "[secret masqué]",
+  };
   if (env.NODE_ENV === "development") {
-    return { level: env.LOG_LEVEL, transport: { target: "pino-pretty" } } as FastifyLoggerOptions;
+    return {
+      level: env.LOG_LEVEL,
+      redact,
+      transport: { target: "pino-pretty" },
+    } as FastifyLoggerOptions;
   }
-  return { level: env.LOG_LEVEL };
+  return { level: env.LOG_LEVEL, redact } as FastifyLoggerOptions;
 }
 
 /** Dépendances externes remplaçables (notamment dans les tests). */

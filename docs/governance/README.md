@@ -9,3 +9,5 @@ Documentation des règles d'autonomie contrôlée des agents :
 - la gestion des secrets et le modèle de menaces (injection de prompt, escalade de privilèges).
 
 Implémentation correspondante : `packages/security/`.
+
+Détails : [`secrets.md`](./secrets.md) — gestion des variables d'environnement et des secrets.

@@ -95,9 +95,6 @@ importers:
       jose:
         specifier: 6.2.18
         version: 6.2.18
-      zod:
-        specifier: 4.6.7
-        version: 4.6.7
     devDependencies:
       pino-pretty:
         specifier: 13.2.0
@@ -114,6 +111,9 @@ importers:
       '@primeo/integrations':
         specifier: workspace:*
         version: link:../../packages/integrations
+      '@primeo/security':
+        specifier: workspace:*
+        version: link:../../packages/security
       '@primeo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
@@ -242,6 +242,9 @@ importers:
       '@primeo/shared':
         specifier: workspace:*
         version: link:../shared
+      zod:
+        specifier: 4.6.7
+        version: 4.6.7
 
   packages/shared:
     dependencies:

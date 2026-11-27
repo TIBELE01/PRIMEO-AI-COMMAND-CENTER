@@ -1,17 +1,35 @@
 import { fileURLToPath } from "node:url";
 import { SERVICES } from "@primeo/shared";
 import { loadEnvFile } from "@primeo/shared/node";
+import {
+  describeEnvironment,
+  EnvironmentValidationError,
+  loadEnvironment,
+  type LoadedEnvironment,
+} from "@primeo/security/secrets";
 import { pino } from "pino";
 
 loadEnvFile(fileURLToPath(new URL("../../../.env", import.meta.url)));
 
-const isDevelopment = (process.env.NODE_ENV ?? "development") === "development";
+// Validation centralisée de la configuration au démarrage : arrêt immédiat si elle est invalide.
+let env: LoadedEnvironment;
+try {
+  env = loadEnvironment("workers");
+} catch (error) {
+  if (error instanceof EnvironmentValidationError) {
+    console.error(error.message);
+    process.exit(1);
+  }
+  throw error;
+}
+
 const logger = pino({
   name: SERVICES.workers,
-  level: process.env.LOG_LEVEL ?? "info",
-  ...(isDevelopment ? { transport: { target: "pino-pretty" } } : {}),
+  level: env.LOG_LEVEL ?? "info",
+  ...(env.NODE_ENV === "development" ? { transport: { target: "pino-pretty" } } : {}),
 });
 
+logger.info({ configuration: describeEnvironment(env) }, "Configuration validée.");
 // Aucune tâche n'est encore enregistrée : la file de tâches, le planificateur et l'exécution
 // des agents seront branchés ici dans les phases suivantes.
 logger.info("Workers démarrés — aucune tâche enregistrée pour le moment.");

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@primeo/integrations": "workspace:*",
+    "@primeo/security": "workspace:*",
     "@primeo/shared": "workspace:*",
     "@primeo/ui": "workspace:*",
     "@supabase/ssr": "0.12.7",
