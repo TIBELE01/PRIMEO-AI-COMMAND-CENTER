@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "1.14.0",
+    "@primeo/security": "workspace:*",
     "@primeo/shared": "workspace:*",
-    "@primeo/security": "workspace:*"
+    "openai": "7.65.0"
   }
 }

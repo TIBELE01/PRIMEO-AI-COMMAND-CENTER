@@ -1,13 +1,17 @@
 # @primeo/ai-engine
 
-Interface unique vers les modèles d'IA, quel que soit le fournisseur.
+Interface unique vers les modèles d'IA (OpenAI, Anthropic, DeepSeek…). Serveur uniquement.
+Documentation complète : [`docs/architecture/ai-engine.md`](../../docs/architecture/ai-engine.md).
 
-| Dossier             | Rôle                                                                                 |
-| ------------------- | ------------------------------------------------------------------------------------ |
-| `providers/`        | Adaptateurs au même contrat : `openai/`, `anthropic/` (texte), `elevenlabs/` (voix)  |
-| `model-router/`     | Choix du modèle par agent, repli si un fournisseur est indisponible, suivi des coûts |
-| `prompts/`          | Assemblage des instructions système à partir de la configuration de l'agent          |
-| `memory/`           | Mémoire courte (conversation), de travail (mission) et longue (recherche sémantique) |
-| `response-handler/` | Validation des réponses structurées et extraction des demandes d'action              |
+| Dossier / fichier                | Rôle                                                                        |
+| -------------------------------- | --------------------------------------------------------------------------- |
+| `types.ts`, `errors.ts`          | Contrat commun et erreurs normalisées                                       |
+| `providers/anthropic/`           | Claude, via le SDK officiel `@anthropic-ai/sdk`                             |
+| `providers/openai-compatible/`   | Toute API « Chat Completions », via le SDK officiel `openai`                |
+| `providers/openai/`, `deepseek/` | Fabriques des fournisseurs OpenAI et DeepSeek                               |
+| `providers/elevenlabs/`          | Voix (phase ultérieure)                                                     |
+| `model-router/`                  | `AIEngine` : références `fournisseur/modèle`, replis, suivi de consommation |
+| `response-handler/`              | Décodage des arguments d'outils, contrôle des réponses inexploitables       |
+| `prompts/`, `memory/`            | Assemblage des instructions et mémoire des agents (phases suivantes)        |
 
 Changer le modèle d'un agent est une modification de configuration, pas de code.

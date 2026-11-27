@@ -516,6 +516,22 @@ describe.skipIf(!TEST_DATABASE_URL)("Base de données — migrations et garantie
     });
   });
 
+  describe("fournisseurs d'IA", () => {
+    it("accepte DeepSeek comme fournisseur d'un agent", async () => {
+      await inRollback(db.client, async () => {
+        const department = await insertDepartment(db.client);
+        const { rows } = await db.client.query<{ model_provider: string }>(
+          `insert into public.agents
+             (slug, department_id, kind, display_name, title, system_instructions, model_provider, model_name)
+           values ('agent-deepseek', $1, 'specialist', 'Analyste', 'Analyste', 'Instructions', 'deepseek', 'deepseek-chat')
+           returning model_provider`,
+          [department],
+        );
+        expect(rows[0]!.model_provider).toBe("deepseek");
+      });
+    });
+  });
+
   describe("mémoire des agents", () => {
     it("stocke un vecteur et permet la recherche par similarité", async () => {
       await inRollback(db.client, async () => {

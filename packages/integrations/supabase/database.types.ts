@@ -1598,7 +1598,7 @@ export type Database = {
       actor_type: "user" | "agent" | "system" | "integration"
       agent_kind: "director" | "specialist"
       agent_status: "draft" | "active" | "paused" | "retired"
-      ai_model_provider: "openai" | "anthropic"
+      ai_model_provider: "openai" | "anthropic" | "deepseek"
       approval_status:
         | "pending"
         | "approved"
@@ -1613,6 +1613,7 @@ export type Database = {
       integration_provider:
         | "openai"
         | "anthropic"
+        | "deepseek"
         | "elevenlabs"
         | "zoho"
         | "n8n"
@@ -1786,7 +1787,7 @@ export const Constants = {
       actor_type: ["user", "agent", "system", "integration"],
       agent_kind: ["director", "specialist"],
       agent_status: ["draft", "active", "paused", "retired"],
-      ai_model_provider: ["openai", "anthropic"],
+      ai_model_provider: ["openai", "anthropic", "deepseek"],
       approval_status: [
         "pending",
         "approved",
@@ -1802,6 +1803,7 @@ export const Constants = {
       integration_provider: [
         "openai",
         "anthropic",
+        "deepseek",
         "elevenlabs",
         "zoho",
         "n8n",

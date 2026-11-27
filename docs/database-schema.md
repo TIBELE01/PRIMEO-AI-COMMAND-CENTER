@@ -116,7 +116,7 @@ Entier `smallint` contraint entre **1 et 3** :
 | `severity`             | `info`, `warning`, `critical`                                                                         |
 | `agent_kind`           | `director`, `specialist`                                                                              |
 | `agent_status`         | `draft`, `active`, `paused`, `retired`                                                                |
-| `ai_model_provider`    | `openai`, `anthropic`                                                                                 |
+| `ai_model_provider`    | `openai`, `anthropic`, `deepseek`                                                                     |
 | `mission_priority`     | `low`, `normal`, `high`, `critical`                                                                   |
 | `mission_status`       | `draft`, `pending`, `in_progress`, `awaiting_approval`, `blocked`, `completed`, `failed`, `cancelled` |
 | `mission_role`         | `lead`, `contributor`, `reviewer`                                                                     |
@@ -131,7 +131,7 @@ Entier `smallint` contraint entre **1 et 3** :
 | `kpi_direction`        | `higher_is_better`, `lower_is_better`, `target_is_best`                                               |
 | `measurement_source`   | `system`, `agent`, `integration`, `manual`                                                            |
 | `notification_type`    | `approval_required`, `alert`, `report_published`, `mission_update`, `system`                          |
-| `integration_provider` | `openai`, `anthropic`, `elevenlabs`, `zoho`, `n8n`, `mcp`, `email`, `other`                           |
+| `integration_provider` | `openai`, `anthropic`, `deepseek`, `elevenlabs`, `zoho`, `n8n`, `mcp`, `email`, `other`               |
 | `integration_status`   | `not_configured`, `active`, `error`, `disabled`                                                       |
 | `memory_scope`         | `working`, `long_term`                                                                                |
 | `memory_visibility`    | `private`, `department`, `organization`                                                               |
@@ -675,6 +675,7 @@ Migration : `20261127001100_row_level_security.sql`
 | Tables                   | Règle                                                         |
 | ------------------------ | ------------------------------------------------------------- |
 | `users`                  | Son propre compte ; tous les comptes pour un dirigeant        |
+| `user_invitations`       | Dirigeant actif uniquement                                    |
 | `notifications`          | Uniquement ses propres notifications                          |
 | `integration_secrets`    | **Jamais** (droit retiré et aucune politique)                 |
 | Toutes les autres tables | Réservées à un dirigeant **actif** (`private.is_executive()`) |
@@ -701,6 +702,9 @@ Migration : `20261127001100_row_level_security.sql`
 | `20261127000900_memory_and_ai_usage.sql`               | `agent_memories`, `ai_usage`                                                                     |
 | `20261127001000_activity_logs.sql`                     | `activity_logs`, chaînage et vérification                                                        |
 | `20261127001100_row_level_security.sql`                | RLS, politiques, droits                                                                          |
+| `20261127001200_user_invitations.sql`                  | `user_invitations`, inscription sur invitation                                                   |
+| `20261127001300_foreign_key_indexes.sql`               | Index des clés étrangères restantes (conseiller Supabase)                                        |
+| `20261127001400_deepseek_provider.sql`                 | DeepSeek ajouté aux fournisseurs de modèles                                                      |
 
 **Données initiales** — `database/seeds/001_departments.sql` crée les 7 directions de Primeo
 (idempotent). Aucun agent n'est créé à ce stade : leurs définitions seront établies avec vous.
